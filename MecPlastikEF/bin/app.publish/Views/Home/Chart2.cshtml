@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Chart2";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Gauge Chart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'>
+    <link rel="stylesheet" href="~/Scripts/style.css">
+
+</head>
+<body>
+    <!-- partial:index.partial.html -->
+    <main class="main">
+        <button id="random" class="button">Random value</button>
+        <h1 class="main__title">Gauge Chart</h1>
+
+        <div class="gauge-container">
+            <div class="gauge"></div>
+            <div class="gauge"></div>
+            <div class="gauge"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>A pen by <a href="http://brunocarvalho.me">Bruno Carvalho</a></p>
+    </footer>
+
+    <svg width="0" height="0" version="1.1" class="gradient-mask" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="gradientGauge">
+                <stop class="color-red" offset="0%" />
+                <stop class="color-yellow" offset="17%" />
+                <stop class="color-green" offset="40%" />
+                <stop class="color-yellow" offset="87%" />
+                <stop class="color-red" offset="100%" />
+            </linearGradient>
+        </defs>
+    </svg>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js'></script>
+    <script src='https://cdn3.devexpress.com/jslib/17.1.6/js/dx.all.js'></script>
+    <script src="~/Scripts/script.js"></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VTSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AnlikTabloDegerleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TezgahID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TezgahName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SabahCount" Type="Int32" />
+    <Property Name="SabahDurusCount" Type="Int32" />
+    <Property Name="SabahDurusSuresi" Type="Time" Precision="7" />
+    <Property Name="GeceCount" Type="Int32" />
+    <Property Name="GeceDurusCount" Type="Int32" />
+    <Property Name="GeceDurusSuresi" Type="Time" Precision="7" />
+    <Property Name="Durum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GecikmeSuresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tarih" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="BakimDurumu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tarih" Type="DateTime" Precision="3" />
+    <Property Name="TezgahName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Durum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TezgahID" Type="Int32" />
+    <Property Name="BitisTarihi" Type="DateTime" Precision="3" />
+    <Property Name="TezgahDegisimSuresi" Type="Time" Precision="7" />
+    <Property Name="Kalip1Adet" Type="Int32" />
+    <Property Name="Kalip2Adet" Type="Int32" />
+    <Property Name="Kalip3Adet" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TezgahID_Name">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="TezgahId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TezgahId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TezgahName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tzgh_table">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Tezgah_ID" />
+      <PropertyRef Name="Tezgah_no" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tezgah_ID" Type="Int32" Nullable="false" />
+    <Property Name="Tezgah_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Uretim_Table">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Tezgah_ID" />
+      <PropertyRef Name="Uretim_Adet" />
+      <PropertyRef Name="Uretim_Tarih" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tezgah_ID" Type="Int32" Nullable="false" />
+    <Property Name="Uretim_Adet" Type="Int64" Nullable="false" />
+    <Property Name="Uretim_Tarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="userPass" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userPass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="VTSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AnlikTabloDegerleri" EntityType="Self.AnlikTabloDegerleri" />
+    <EntitySet Name="BakimDurumu" EntityType="Self.BakimDurumu" />
+    <EntitySet Name="TezgahID_Name" EntityType="Self.TezgahID_Name" />
+    <EntitySet Name="tzgh_table" EntityType="Self.tzgh_table" />
+    <EntitySet Name="Uretim_Table" EntityType="Self.Uretim_Table" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <FunctionImport Name="GetLastProductionsOfMachines" ReturnType="Collection(VTSModel.GetLastProductionsOfMachines_Result)" />
+  </EntityContainer>
+  <ComplexType Name="GetLastProductionsOfMachines_Result">
+    <Property Type="String" Name="TezgahId" Nullable="true" />
+    <Property Type="String" Name="TezgahName" Nullable="true" />
+    <Property Type="Int32" Name="Uretim_Adet" Nullable="true" />
+    <Property Type="String" Name="Uretim_Tarih" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,59 @@
+﻿@using MecPlastikEF.Models
+@using MecPlastikEF.Models.Entity
+@{
+    ViewBag.Title = "MepSetting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    @{
+        var tezgahSayisi = ViewData["Tezgahlar"] as IList<TezgahID_Name>;
+    }
+    <h2 class="text-center alert-danger" style="margin-top:4%">MİDSOFT</h2>
+    <div class="row">
+        @foreach (var item in tezgahSayisi)
+        {
+            <div class="col col-md-4 col-lg-3  " style="">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                @item.TezgahName
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td >
+                                <button style="height:55px" id="@item.TezgahId" name="@item.TezgahId" class="btn btn-success">@Html.ActionLink("Çalışmayı Durdur", "TezgahDegisim", new { @tezgahID = item.TezgahId, @isim = item.TezgahName, @durum = "A" })</button>
+                                @*  <button type="submit" id="@item.TezgahID" name="@item.TezgahID" class="btn btn-success" onclick="durumDegis(@item.TezgahID)">@Html.ActionLink(item.TezgahID.ToString(), "CreatePdf", new { @tezgahID = item.TezgahID, @tarih = dt })</button>*@
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        }
+    </div>
+
+    @*<script>
+        function durumDegis(id) {
+            document.getElementById(id).innerHTML = "Duruşta";
+            document.getElementById(id).className = "btn btn-danger";
+            @{
+                DateTime now = DateTime.Now;
+                kalipDegisimList.Add(new KalipDegisimModel() { TezgahID = 102 , DegisimSuresi = now });
+            }
+        }
+    </script>*@
+
+
+</body>
+
+</html>
+

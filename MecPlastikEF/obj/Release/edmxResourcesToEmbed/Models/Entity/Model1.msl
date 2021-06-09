@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VTSModelStoreContainer" CdmEntityContainer="VTSEntities">
+    <EntitySetMapping Name="AnlikTabloDegerleri">
+      <EntityTypeMapping TypeName="VTSModel.AnlikTabloDegerleri">
+        <MappingFragment StoreEntitySet="AnlikTabloDegerleri">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TezgahID" ColumnName="TezgahID" />
+          <ScalarProperty Name="TezgahName" ColumnName="TezgahName" />
+          <ScalarProperty Name="SabahCount" ColumnName="SabahCount" />
+          <ScalarProperty Name="SabahDurusCount" ColumnName="SabahDurusCount" />
+          <ScalarProperty Name="SabahDurusSuresi" ColumnName="SabahDurusSuresi" />
+          <ScalarProperty Name="GeceCount" ColumnName="GeceCount" />
+          <ScalarProperty Name="GeceDurusCount" ColumnName="GeceDurusCount" />
+          <ScalarProperty Name="GeceDurusSuresi" ColumnName="GeceDurusSuresi" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+          <ScalarProperty Name="GecikmeSuresi" ColumnName="GecikmeSuresi" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BakimDurumu">
+      <EntityTypeMapping TypeName="VTSModel.BakimDurumu">
+        <MappingFragment StoreEntitySet="BakimDurumu">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="TezgahName" ColumnName="TezgahName" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+          <ScalarProperty Name="TezgahID" ColumnName="TezgahID" />
+          <ScalarProperty Name="BitisTarihi" ColumnName="BitisTarihi" />
+          <ScalarProperty Name="TezgahDegisimSuresi" ColumnName="TezgahDegisimSuresi" />
+          <ScalarProperty Name="Kalip1Adet" ColumnName="Kalip1Adet" />
+          <ScalarProperty Name="Kalip2Adet" ColumnName="Kalip2Adet" />
+          <ScalarProperty Name="Kalip3Adet" ColumnName="Kalip3Adet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TezgahID_Name">
+      <EntityTypeMapping TypeName="VTSModel.TezgahID_Name">
+        <MappingFragment StoreEntitySet="TezgahID-Name">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TezgahId" ColumnName="TezgahId" />
+          <ScalarProperty Name="TezgahName" ColumnName="TezgahName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tzgh_table">
+      <EntityTypeMapping TypeName="VTSModel.tzgh_table">
+        <MappingFragment StoreEntitySet="tzgh_table">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tezgah_ID" ColumnName="Tezgah_ID" />
+          <ScalarProperty Name="Tezgah_no" ColumnName="Tezgah_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uretim_Table">
+      <EntityTypeMapping TypeName="VTSModel.Uretim_Table">
+        <MappingFragment StoreEntitySet="Uretim_Table">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tezgah_ID" ColumnName="Tezgah_ID" />
+          <ScalarProperty Name="Uretim_Adet" ColumnName="Uretim_Adet" />
+          <ScalarProperty Name="Uretim_Tarih" ColumnName="Uretim_Tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="VTSModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userPass" ColumnName="userPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetLastProductionsOfMachines" FunctionName="VTSModel.Store.GetLastProductionsOfMachines">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTSModel.GetLastProductionsOfMachines_Result">
+          <ScalarProperty Name="TezgahId" ColumnName="TezgahId" />
+          <ScalarProperty Name="TezgahName" ColumnName="TezgahName" />
+          <ScalarProperty Name="Uretim_Adet" ColumnName="Uretim_Adet" />
+          <ScalarProperty Name="Uretim_Tarih" ColumnName="Uretim_Tarih" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

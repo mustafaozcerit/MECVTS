@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VTSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AnlikTabloDegerleri">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TezgahID" Type="nvarchar" MaxLength="50" />
+    <Property Name="TezgahName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SabahCount" Type="int" />
+    <Property Name="SabahDurusCount" Type="int" />
+    <Property Name="SabahDurusSuresi" Type="time" Precision="7" />
+    <Property Name="GeceCount" Type="int" />
+    <Property Name="GeceDurusCount" Type="int" />
+    <Property Name="GeceDurusSuresi" Type="time" Precision="7" />
+    <Property Name="Durum" Type="nvarchar" MaxLength="50" />
+    <Property Name="GecikmeSuresi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tarih" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BakimDurumu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="TezgahName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Durum" Type="nvarchar" MaxLength="50" />
+    <Property Name="TezgahID" Type="int" />
+    <Property Name="BitisTarihi" Type="datetime" />
+    <Property Name="TezgahDegisimSuresi" Type="time" Precision="7" />
+    <Property Name="Kalip1Adet" Type="int" />
+    <Property Name="Kalip2Adet" Type="int" />
+    <Property Name="Kalip3Adet" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'VTS.dbo.test' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="test">
+          <Property Name="date" Type="datetime" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VTS.dbo.TezgahID-Name' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TezgahID-Name">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="TezgahId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TezgahId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TezgahName" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VTS.dbo.tzgh_table' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tzgh_table">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Tezgah_ID" />
+      <PropertyRef Name="Tezgah_no" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tezgah_ID" Type="int" Nullable="false" />
+    <Property Name="Tezgah_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VTS.dbo.Uretim_Table' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Uretim_Table">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Tezgah_ID" />
+      <PropertyRef Name="Uretim_Adet" />
+      <PropertyRef Name="Uretim_Tarih" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tezgah_ID" Type="int" Nullable="false" />
+    <Property Name="Uretim_Adet" Type="bigint" Nullable="false" />
+    <Property Name="Uretim_Tarih" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'VTS.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="userPass" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="userPass" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Function Name="GetLastProductionsOfMachines" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="VTSModelStoreContainer">
+    <EntitySet Name="AnlikTabloDegerleri" EntityType="Self.AnlikTabloDegerleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BakimDurumu" EntityType="Self.BakimDurumu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TezgahID-Name" EntityType="Self.TezgahID-Name" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TezgahID-Name].[Id] AS [Id], 
+    [TezgahID-Name].[TezgahId] AS [TezgahId], 
+    [TezgahID-Name].[TezgahName] AS [TezgahName]
+    FROM [dbo].[TezgahID-Name] AS [TezgahID-Name]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tzgh_table" EntityType="Self.tzgh_table" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tzgh_table].[ID] AS [ID], 
+    [tzgh_table].[Tezgah_ID] AS [Tezgah_ID], 
+    [tzgh_table].[Tezgah_no] AS [Tezgah_no]
+    FROM [dbo].[tzgh_table] AS [tzgh_table]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Uretim_Table" EntityType="Self.Uretim_Table" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Uretim_Table].[ID] AS [ID], 
+    [Uretim_Table].[Tezgah_ID] AS [Tezgah_ID], 
+    [Uretim_Table].[Uretim_Adet] AS [Uretim_Adet], 
+    [Uretim_Table].[Uretim_Tarih] AS [Uretim_Tarih]
+    FROM [dbo].[Uretim_Table] AS [Uretim_Table]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Users].[Id] AS [Id], 
+    [Users].[userId] AS [userId], 
+    [Users].[userPass] AS [userPass]
+    FROM [dbo].[Users] AS [Users]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

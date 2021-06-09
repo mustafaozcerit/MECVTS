@@ -1,0 +1,395 @@
+﻿@using MecPlastikEF.Models.Entity
+@model IList<KalipDegisimModel>
+@using MecPlastikEF.Models
+@*@model  IList<VardiyaCount>*@
+
+@{
+    ViewBag.Title = "Table";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var List = ViewData["Data"] as IList<VardiyaCount>;
+    var siraliDurusList = List.OrderByDescending(x => x.sabahDurusSuresi).ToList();
+    var tezgahDataAl = ViewData["TezgahDegisimDataAl"] as IList<BakimDurumu>;
+    var kalipList = ViewData["KalipData"] as IList<KalipDegisimModel>;
+    string durum = "";
+    string TezgahID = "null";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="refresh" content="10 ;URL=Table">
+</head>
+<body>
+    @if (kalipList != null)
+    {
+        foreach (var item in kalipList)
+        {
+            durum = item.Durum;
+            TezgahID = item.TezgahID.ToString();
+        }
+    }
+    <h2 class="text-center alert-danger" style="margin-top:4%">MİDSOFT</h2>
+    <div class="row" id="deneme">
+
+        @foreach (var item in List)
+        {
+            durum = item.Durum.ToString();
+            string kalipDegisimSuresi = "Kalip Degişimi Yapılmadı";
+            foreach (var tezgah in tezgahDataAl)
+            {
+
+                if (tezgah.TezgahID.ToString
+                () == item.TezgahID)
+                {
+
+                    if (item.Durum.ToString() == "False" && tezgah.Durum == "A")
+                    {
+                        durum = tezgah.Durum;
+
+                    }
+                    if (tezgah.Durum == "P" && tezgah.TezgahDegisimSuresi != null)
+                    {
+                        kalipDegisimSuresi = tezgah.TezgahDegisimSuresi.ToString().Substring(0, 5) + " DK  Kalıp Değişim Süresi";
+
+                    }
+
+                }
+            }
+            if (durum == "True" )
+            {
+                <div class="col-12 col-md-6 col-sm-12 .col-xl-4  alert-info" style="border-style: solid; background-color: green; border-color: darkblue ; padding:5px ; height:280px;" id="phone">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" style="color:white; font-size:18px" class="text-center" colspan="7">
+                                    @item.TezgahName
+                                </th>
+                                @*<th colspan="5">
+                                    <button class="btn btn-success">@Html.ActionLink("Kalıp Değişimlerini Göster", "MepSetting")</button>
+                                </th>*@
+                            </tr>
+                            <tr>
+                                <th class="text-center" style="color: white" colspan="3">07:00-19:00 Vardiyası </th>
+                                <th class='text-center' style='color: white' colspan='3'>19:00-07:00 Vardiyası </th>
+                            </tr>
+                            <tr>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Durumu</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color:white">
+                            <tr>
+                                <th>
+                                    <p> @item.sabahCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.sabahDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.sabahDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.geceDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.gecikmeSuresi</p>
+                                </th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            }
+            else if (durum == "False" )
+            {
+                <div class="col-12 col-md-6 col-sm-12 .col-xl-4  alert-info" style="border-style: solid; background-color: red; border-color: darkblue ; padding:5px ; height:280px;" id="phone">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" style="color:white; font-size:18px" class="text-center" colspan="7">
+                                    @item.TezgahName
+                                </th>
+                                @*<th colspan="5">
+                                    <button class="btn btn-success">@Html.ActionLink("Kalıp Değişimlerini Göster", "MepSetting")</button>
+                                </th>*@
+                            </tr>
+                            <tr>
+                                <th class="text-center" style="color: white" colspan="3">07:00-19:00 Vardiyası </th>
+                                <th class='text-center' style='color: white' colspan='3'>19:00-07:00 Vardiyası </th>
+                            </tr>
+                            <tr>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Durumu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="color:white">
+                                <th>
+                                    <p> @item.sabahCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.sabahDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.sabahDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.geceDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.gecikmeSuresi</p>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+            <!--else if (durum == "P" && kalipDegisimSuresi != "Kalip Degişimi Yapılmadı")
+            {
+                <div class="col-12 col-md-6 col-sm-12 .col-xl-4  alert-info" style="border-style: solid; background-color: darkorange; border-color: darkblue ; padding:5px ; height:280px;" id="phone">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" style="color:white; font-size:18px" class="text-center" colspan="7">
+                                    @item.TezgahName
+                                </th>-->
+                                @*<th colspan="5">
+                                    <button class="btn btn-success">@Html.ActionLink("Kalıp Değişimlerini Göster", "MepSetting")</button>
+                                </th>*@
+                            <!--</tr>
+                            <tr>
+                                <th class="text-center" style="color: white" colspan="3">07:00-19:00 Vardiyası </th>
+                                <th class='text-center' style='color: white' colspan='3'>19:00-07:00 Vardiyası </th>
+                            </tr>
+                            <tr>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Durumu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="color:white">
+                                <th>
+                                    <p> @item.sabahCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.sabahDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.sabahDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.geceDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.gecikmeSuresi</p>
+                                </th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            }-->
+            <!--else if (kalipDegisimSuresi != "Kalip Degişimi Yapılmadı")
+            {
+                <div class="col-12 col-md-6 col-sm-12 .col-xl-4  alert-info" style="border-style: solid; background-color: blue; border-color: darkblue ; padding:5px ; height:280px;" id="phone">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" style="color:white; font-size:18px" class="text-center" colspan="7">
+                                    @item.TezgahName
+                                </th>-->
+                                @*<th colspan="5">
+                                    <button class="btn btn-success">@Html.ActionLink("Kalıp Değişimlerini Göster", "MepSetting")</button>
+                                </th>*@
+                            <!--</tr>
+                            <tr>
+                                <th class="text-center" style="color: white" colspan="3">07:00-19:00 Vardiyası </th>
+                                <th class='text-center' style='color: white' colspan='3'>19:00-07:00 Vardiyası </th>
+                            </tr>
+                            <tr>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Üretim Adedi</th>
+                                <th scope='col' style='color:white'>Duruş Sayısı</th>
+                                <th scope='col' style='color:white'>Duruş Süresi</th>
+                                <th scope='col' style='color:white'>Durumu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="color:white">
+                                <th>
+                                    <p> @item.sabahCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.sabahDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.sabahDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceCount</p>
+                                </th>
+                                <th>
+
+                                    <p> @item.geceDurusCount</p>
+                                </th>
+                                <th>
+                                    <p> @item.geceDurusSuresi</p>
+                                </th>
+                                <th>
+                                    <p> @item.gecikmeSuresi</p>
+                                </th>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            }-->
+        }
+    </div>
+    <br />
+    <br />
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th class="text-center alert-danger" colspan="4">
+                    EN ÇOK DURUŞ YAŞAYAN 5 MAKİNE
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Makine İsmi</th>
+                <th scope="col">Duruş Süresi</th>
+                <th scope="col">Duruş Sayısı</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>@siraliDurusList[0].TezgahName</td>
+                <td>@siraliDurusList[0].sabahDurusSuresi</td>
+                <td>@siraliDurusList[0].sabahDurusCount</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>@siraliDurusList[1].TezgahName</td>
+                <td>@siraliDurusList[1].sabahDurusSuresi</td>
+                <td>@siraliDurusList[1].sabahDurusCount</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>@siraliDurusList[2].TezgahName</td>
+                <td>@siraliDurusList[2].sabahDurusSuresi</td>
+                <td>@siraliDurusList[2].sabahDurusCount</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>@siraliDurusList[3].TezgahName</td>
+                <td>@siraliDurusList[3].sabahDurusSuresi</td>
+                <td>@siraliDurusList[3].sabahDurusCount</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>@siraliDurusList[4].TezgahName</td>
+                <td>@siraliDurusList[4].sabahDurusSuresi</td>
+                <td>@siraliDurusList[4].sabahDurusCount</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+@{
+    int tezgahID1 = 0;
+    TimeSpan tezgahDegisimSuresi1 = TimeSpan.Zero;
+    DateTime tarih1 = DateTime.Now;
+    string durum1 = "";
+    DateTime bitisTarih1 = DateTime.Now;
+}
+@*<input type="submit" value="" id="btnGonder" style="visibility:hidden" />
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    @foreach (var item in List)
+    {
+        durum = item.Durum.ToString();
+        foreach (var tezgah in tezgahDataAl)
+        {
+
+            if (tezgah.TezgahID.ToString
+            () == item.TezgahID)
+            {
+                if (item.Durum.ToString() == "True" && tezgah.Durum == "A")
+                {
+                    TimeSpan tezgahDegisimSuresi = DateTime.Now - DateTime.Parse(tezgah.Tarih.ToString());
+                    tezgahID1 = Int32.Parse(item.TezgahID);
+                    tezgahDegisimSuresi1 = tezgahDegisimSuresi;
+                    bitisTarih1 = DateTime.Now;
+                    durum1 = "P";
+                }
+            }
+        }
+    }
+//--------- JSON Verisini Bu Arada Oluşturdum--------------------
+        var bakimDurumu = {
+            tezgahDegisimSuresi: '@tezgahDegisimSuresi1',
+            tezgahID: '@tezgahID1',
+            bitisTarih: '@bitisTarih1',
+            durum: '@durum1'
+                }
+        //--------- JSON Verisini Bu Arada Oluşturdum--------------------
+            $.ajax({
+                url: '@Url.Action("TezgahPasifYap", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                data: bakimDurumu,
+                success: function (data) {
+                    alert(data);
+                },
+                   error: function (data) {
+                }
+            });
+    });
+</script>*@
+
+
